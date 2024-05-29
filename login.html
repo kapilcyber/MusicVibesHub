@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="icon" href="C:/Users/KApil_CyBer/Documents/labWD/AudioPlayerTutorial/favicon1.ico" type="image/x-icon">
+  <!-- Fontawesome CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Google Font Link */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('image4.jpg') center/cover no-repeat;
+      /* Add your background image URL here */
+      padding: 30px;
+    }
+
+    .container {
+      position: relative;
+      max-width: 850px;
+      width: 100%;
+      background: #fff;
+      padding: 40px 30px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      perspective: 2700px;
+    }
+
+    .container .cover {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 50%;
+      z-index: 98;
+      transition: all 1s ease;
+      transform-origin: left;
+      transform-style: preserve-3d;
+    }
+
+    .container #flip:checked~.cover {
+      transform: rotateY(-180deg);
+    }
+
+    .container .cover .front,
+    .container .cover .back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .cover .back {
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+    }
+
+    .container .cover::before,
+    .container .cover::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+
+      opacity: 0.5;
+      z-index: 12;
+    }
+
+    .container .cover::after {
+      opacity: 0.3;
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+    }
+
+    .container .cover img {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      z-index: 10;
+    }
+
+    .container .cover .text {
+      position: absolute;
+      z-index: 130;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container .forms {
+      height: 100%;
+      width: 100%;
+      background: #fff;
+    }
+
+    .container .form-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-content .login-form,
+    .form-content .signup-form {
+      width: calc(100% / 2 - 25px);
+    }
+
+    .forms .form-content .title {
+      position: relative;
+      font-size: 24px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .forms .form-content .title:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 25px;
+      background: #7d2ae8;
+    }
+
+    .forms .signup-form .title:before {
+      width: 20px;
+    }
+
+    .forms .form-content .input-boxes {
+      margin-top: 30px;
+    }
+
+    .forms .form-content .input-box {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      width: 100%;
+      margin: 10px 0;
+      position: relative;
+    }
+
+    .form-content .input-box input {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: none;
+      padding: 0 30px;
+      font-size: 16px;
+      font-weight: 500;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .form-content .input-box input:focus,
+    .form-content .input-box input:valid {
+      border-color: #7d2ae8;
+    }
+
+    .form-content .input-box i {
+      position: absolute;
+      color: #7d2ae8;
+      font-size: 17px;
+    }
+
+    .forms .form-content .text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .forms .form-content .text a {
+      text-decoration: none;
+    }
+
+    .forms .form-content .text a:hover {
+      text-decoration: underline;
+    }
+
+    .forms .form-content .button {
+      color: #fff;
+      margin-top: 40px;
+    }
+
+    .forms .form-content .button input {
+      color: #fff;
+      background: black;
+      border-radius: 6px;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .forms .form-content .button input:hover {
+      background: #5b13b9;
+    }
+
+    .forms .form-content label {
+      color: #5b13b9;
+      cursor: pointer;
+    }
+
+    .forms .form-content label:hover {
+      text-decoration: underline;
+    }
+
+    .forms .form-content .login-text,
+    .forms .form-content .sign-up-text {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .container #flip {
+      display: none;
+    }
+
+    @media (max-width: 730px) {
+      .container .cover {
+        display: none;
+      }
+
+      .form-content .login-form,
+      .form-content .signup-form {
+        width: 100%;
+      }
+
+      .form-content .signup-form {
+        display: none;
+      }
+
+      .container #flip:checked~.forms .signup-form {
+        display: block;
+      }
+
+      .container #flip:checked~.forms .login-form {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+      <div class="front">
+        <img src="image6.jpeg" alt="">
+      </div>
+    </div>
+    <div class="forms">
+      <div class="form-content">
+        <div class="login-form">
+          <div class="title">Login</div>
+          <form action="#">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="text" id="loginUsername" placeholder="Enter your email" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+              </div>
+              <div class="button input-box">
+                <input type="button" value="Login" onclick="login()">
+              </div>
+              <div class="text sign-up-text">Don't have an account? <label for="flip" onclick="toggleForm()">Sigup
+                  now</label></div>
+            </div>
+          </form>
+        </div>
+        <div class="signup-form hidden">
+          <div class="title">Signup</div>
+          <form action="#">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" id="signupName" placeholder="Enter your name" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="text" id="signupUsername" placeholder="Enter your email" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="signupPassword" placeholder="Enter your password" required>
+              </div>
+              <div class="button input-box">
+                <input type="button" value="Signup" onclick="signup()">
+              </div>
+              <div class="text sign-up-text">Already have an account? <label for="flip" onclick="toggleForm()">Login
+                  now</label></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const image6 = new Image();
+    const image7 = new Image();
+
+    image6.src = 'image6.jpeg';
+    image7.src = 'image7.jpeg';
+
+    // Function to toggle between login and signup forms
+    function toggleForm() {
+      const loginForm = document.querySelector('.login-form');
+      const signupForm = document.querySelector('.signup-form');
+      const flipCheckbox = document.getElementById('flip');
+      const coverImage = document.querySelector('.cover .front img');
+      // Toggle the 'hidden' class to show/hide forms
+      loginForm.classList.toggle('hidden');
+      signupForm.classList.toggle('hidden');
+
+      // Update cover image based on the current form
+      if (flipCheckbox.checked) {
+        // If the signup form is visible, set the cover image to image7.jpeg
+        coverImage.src = 'image7.jpeg';
+      } else {
+        // If the login form is visible, set the cover image to image6.jpeg
+        coverImage.src = 'image6.jpeg';
+      }
+    }
+
+    // Function to handle login
+    function login() {
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+
+      // Validate username format (email address)
+      if (!isValidEmail(username)) {
+        alert('Please enter a valid email address as the username.');
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      // Check if the entered credentials match any user
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        // Redirect to the music page after successful login
+        window.location.href = 'index.html';
+      } else {
+        // Display an error message on the login form
+        alert('Invalid username or password. Please try again.');
+      }
+    }
+
+    // Function to validate email address format
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    // Function to handle signup
+    function signup() {
+      const name = document.getElementById('signupName').value;
+      const username = document.getElementById('signupUsername').value;
+      const password = document.getElementById('signupPassword').value;
+
+      // Validate username format (email address)
+      if (!isValidEmail(username)) {
+        alert('Please enter a valid email address as the username.');
+        return;
+      }
+
+      // Validate password format (alphabet, number, symbol)
+      if (!isValidPassword(password)) {
+        alert('Please enter a valid password with at least one alphabet, one number, and one special character.');
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      // Check if the entered username already exists
+      const usernameExists = users.some(u => u.username === username);
+
+      if (usernameExists) {
+        alert('Username already exists. Please choose a different one.');
+        return;
+      }
+
+      // Add the new user to the stored data
+      users.push({ name, username, password });
+      // Save updated user data to localStorage
+      localStorage.setItem('users', JSON.stringify(users));
+
+      // Redirect to the login page after successful signup
+      window.location.href = 'login.html';
+    }
+
+    // Function to validate password format (alphabet, number, symbol)
+    function isValidPassword(password) {
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+      return passwordRegex.test(password);
+    }
+
+  </script>
+</body>
+
+</html>
