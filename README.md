@@ -1,14 +1,8 @@
-Here is a polished **README.md** draft for **MusicVibesHub**. You can adapt parts (badges, links, usage) as needed.
-
----
-
-```markdown
 # MusicVibesHub 🎧
 
 MusicVibesHub is a simple web app / static front-end project for browsing & playing music.  
 It offers a UI for logging in, selecting tracks, and listening to music files hosted in the repository.
 
----
 
 ## Table of Contents
 
