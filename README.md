@@ -73,17 +73,17 @@ You will need:
 
 1. Clone the repository:
 
-   ```bash
+   '''bash
    git clone https://github.com/kapilcyber/MusicVibesHub.git
    cd MusicVibesHub
-````
+'''
 
 2. (Optional) Start a simple HTTP server. For example, using Python:
 
-   ```bash
+   '''bash
    # For Python 3.x
    python -m http.server 8000
-   ```
+   '''
 
    Or using Node’s `http-server`:
 
